@@ -7,7 +7,7 @@ node {
 
       stage("variables setup") {
 
-        env.IMAGE_NAME = "FTB_D20_1.12_1.3.0"
+        env.IMAGE_NAME = "FTB_D20_1.12_1.4.0"
         env.IMAGE_REPO = "korrd2/vics-dockerized-minecraft"
         env.GITHUB_REPO = "vics-dockerized-minecraft"
 
