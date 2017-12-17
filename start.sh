@@ -228,6 +228,7 @@ Game.WhitelistGroup=Everyone
 
 EOF
 
+mkdir -p /home/McMyAdmin/Minecraft/local/ftbutilities; touch /home/McMyAdmin/Minecraft/local/ftbutilities/config.cfg
 sed '/^[[:blank:]]*#/d;/^\s*$/d' > /home/McMyAdmin/Minecraft/local/ftbutilities/config.cfg <<EOF
 # Configuration file
 
