@@ -7,7 +7,7 @@ node {
 
       stage("variables setup") {
 
-        env.IMAGE_NAME = "FTB_D20_1.12_1.11.0"
+        env.IMAGE_NAME = "FTB_PYRAMID_REBORN_1.12_2.1.1"
         env.IMAGE_REPO = "korrd2/vics-dockerized-minecraft"
         env.GITHUB_REPO = "vics-dockerized-minecraft"
 
@@ -24,7 +24,7 @@ node {
 
       stage("push") {
 
-        if (env.BRANCH_NAME == "master") {
+        if (env.BRANCH_NAME == "ftb-pyramid-reborn") {
           sh "docker tag '$IMAGE_REPO:$BUILD_NUMBER' '$IMAGE_REPO:$IMAGE_NAME'"
           sh "docker push '$IMAGE_REPO:$IMAGE_NAME'"
         } else {

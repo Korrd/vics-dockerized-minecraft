@@ -5,11 +5,11 @@ MAINTAINER victomartin@gmail.com
 WORKDIR /usr/local
 
 ENV MCMA_DIR="/home/McMyAdmin" \
-    PACK_VERSION="1_11_0" \
-    FTB_SERVER_JAR="FTBserver-1.12.2-14.23.3.2691-universal.jar"
+    PACK_VERSION="2_1_1" \
+    FTB_SERVER_JAR="FTBserver-1.12.2-14.23.2.2632-universal.jar"
 ENV MC_DIR="$MCMA_DIR/Minecraft"
 
-ADD http://ftb.cursecdn.com/FTB2/modpacks/FTBPresentsDirewolf20112/$PACK_VERSION/FTBPresentsDirewolf20112Server.zip $MC_DIR/FTBPresentsDirewolf20112Server.zip
+ADD https://ftb.cursecdn.com/FTB2/modpacks/FTBPyramidReborn/$PACK_VERSION/FTBPyramidRebornServer.zip $MC_DIR/FTBPyramidRebornServer.zip
 
 COPY files/McMyAdmin/ $MCMA_DIR
 COPY files/packages/etc.zip /usr/local/
@@ -30,9 +30,9 @@ RUN apt-get update && \
 
 WORKDIR $MC_DIR
 
-RUN unzip $MC_DIR/FTBPresentsDirewolf20112Server.zip -d $MC_DIR && \
+RUN unzip $MC_DIR/FTBPyramidRebornServer.zip -d $MC_DIR && \
     echo 'eula=true' > eula.txt && \
-    rm $MC_DIR/FTBPresentsDirewolf20112Server.zip && \
+    rm $MC_DIR/FTBPyramidRebornServer.zip && \
     chmod +x FTBInstall.sh && \
     ./FTBInstall.sh && \
     mv $FTB_SERVER_JAR ftbserver.jar && \
