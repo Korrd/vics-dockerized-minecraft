@@ -24,7 +24,7 @@ node {
 
       stage("push") {
 
-        if (env.BRANCH_NAME == "master") {
+        if (env.BRANCH_NAME == "ftb-direwolf20.1.12") {
           sh "docker tag '$IMAGE_REPO:$BUILD_NUMBER' '$IMAGE_REPO:$IMAGE_NAME'"
           sh "docker push '$IMAGE_REPO:$IMAGE_NAME'"
         } else {
