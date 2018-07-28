@@ -5,8 +5,8 @@ MAINTAINER victomartin@gmail.com
 WORKDIR /usr/local
 
 ENV MCMA_DIR="/home/McMyAdmin" \
-    PACK_VERSION="2_1_0" \
-    FTB_SERVER_JAR="FTBserver-1.12.2-14.23.4.2732-universal.jar"
+    PACK_VERSION="2_2_0" \
+    FTB_SERVER_JAR="FTBserver-1.12.2-14.23.4.2739-universal.jar"
 ENV MC_DIR="$MCMA_DIR/Minecraft"
 
 ADD http://ftb.cursecdn.com/FTB2/modpacks/FTBPresentsDirewolf20112/$PACK_VERSION/FTBPresentsDirewolf20112Server.zip $MC_DIR/FTBPresentsDirewolf20112Server.zip
