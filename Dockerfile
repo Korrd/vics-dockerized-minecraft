@@ -4,9 +4,10 @@ MAINTAINER victomartin@gmail.com
 
 WORKDIR /usr/local
 
+ARG PACK_VERSION
+
 ENV MCMA_DIR="/home/McMyAdmin" \
-    PACK_VERSION="2_2_0" \
-    FTB_SERVER_JAR="FTBserver-1.12.2-14.23.4.2739-universal.jar"
+    FTB_SERVER_JAR="FTBserver-*-universal.jar"
 ENV MC_DIR="$MCMA_DIR/Minecraft"
 
 ADD http://ftb.cursecdn.com/FTB2/modpacks/FTBPresentsDirewolf20112/$PACK_VERSION/FTBPresentsDirewolf20112Server.zip $MC_DIR/FTBPresentsDirewolf20112Server.zip
@@ -26,17 +27,14 @@ RUN apt-get update && \
   unzip etc.zip && \
   rm etc.zip && \
   chmod +x $MCMA_DIR/start.sh && \
-  chmod +x $MCMA_DIR/MCMA2_Linux_x86_64
-
-WORKDIR $MC_DIR
-
-RUN unzip $MC_DIR/FTBPresentsDirewolf20112Server.zip -d $MC_DIR && \
-    echo 'eula=true' > eula.txt && \
-    rm $MC_DIR/FTBPresentsDirewolf20112Server.zip && \
-    chmod +x FTBInstall.sh && \
-    ./FTBInstall.sh && \
-    mv $FTB_SERVER_JAR ftbserver.jar && \
-    rm -rf /var/lib/apt/lists/*
+  chmod +x $MCMA_DIR/MCMA2_Linux_x86_64 && \
+  unzip $MC_DIR/FTBPresentsDirewolf20112Server.zip -d $MC_DIR && \
+  echo 'eula=true' > eula.txt && \
+  rm $MC_DIR/FTBPresentsDirewolf20112Server.zip && \
+  chmod +x $MC_DIR/FTBInstall.sh && \
+  /bin/bash -c $MC_DIR/FTBInstall.sh && \
+  mv $MC_DIR/$FTB_SERVER_JAR $MC_DIR/ftbserver.jar && \
+  rm -rf /var/lib/apt/lists/*
 
 WORKDIR $MCMA_DIR
 
