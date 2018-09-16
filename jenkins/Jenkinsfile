@@ -7,7 +7,9 @@ node {
 
       stage("variables setup") {
 
-        env.IMAGE_NAME = "FTB_D20_1.12_2.2.0"
+        env.IMAGE_NAME = "FTB_D20_1.12_2.3.0"
+        env.PACK_VERSION = "2_3_0"
+
         env.IMAGE_REPO = "korrd2/vics-dockerized-minecraft"
         env.GITHUB_REPO = "vics-dockerized-minecraft"
 
@@ -19,7 +21,7 @@ node {
       }
 
       stage("build") {
-        sh "docker build --pull -t '$IMAGE_REPO:$BUILD_NUMBER' ."
+        sh "docker build --pull --build-arg PACK_VERSION=$PACK_VERSION -t '$IMAGE_REPO:$BUILD_NUMBER' ."
       }
 
       stage("push") {
