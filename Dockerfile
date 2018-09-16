@@ -29,7 +29,7 @@ RUN apt-get update && \
   chmod +x $MCMA_DIR/start.sh && \
   chmod +x $MCMA_DIR/MCMA2_Linux_x86_64 && \
   unzip $MC_DIR/FTBPresentsDirewolf20112Server.zip -d $MC_DIR && \
-  echo 'eula=true' > eula.txt && \
+  echo 'eula=true' > $MC_DIR/eula.txt && \
   rm $MC_DIR/FTBPresentsDirewolf20112Server.zip && \
   chmod +x $MC_DIR/FTBInstall.sh && \
   /bin/bash -c $MC_DIR/FTBInstall.sh && \
