@@ -7,11 +7,11 @@ WORKDIR /usr/local
 ARG PACK_VERSION
 
 ENV MCMA_DIR="/home/McMyAdmin" \
-    FTB_SERVER_JAR="FTBserver-*-universal.jar"
+    FTB_SERVER_JAR="FTBserver-*-universal.jar" \
+    PACK_FILENAME="FTBUltimateReloadedServer.zip"
 ENV MC_DIR="$MCMA_DIR/Minecraft"
 
-ADD http://ftb.cursecdn.com/FTB2/modpacks/FTBPresentsDirewolf20112/$PACK_VERSION/FTBPresentsDirewolf20112Server.zip $MC_DIR/FTBPresentsDirewolf20112Server.zip
-
+ADD https://ftb.forgecdn.net/FTB2/modpacks/FTBUltimateReloaded/$PACK_VERSION/$PACK_FILENAME $MC_DIR/$PACK_FILENAME
 COPY files/McMyAdmin/ $MCMA_DIR
 COPY files/packages/etc.zip /usr/local/
 COPY start.sh $MCMA_DIR/start.sh
@@ -28,9 +28,9 @@ RUN apt-get update && \
   rm etc.zip && \
   chmod +x $MCMA_DIR/start.sh && \
   chmod +x $MCMA_DIR/MCMA2_Linux_x86_64 && \
-  unzip $MC_DIR/FTBPresentsDirewolf20112Server.zip -d $MC_DIR && \
+  unzip $MC_DIR/$PACK_FILENAME -d $MC_DIR && \
   echo 'eula=true' > $MC_DIR/eula.txt && \
-  rm $MC_DIR/FTBPresentsDirewolf20112Server.zip && \
+  rm $MC_DIR/$PACK_FILENAME && \
   chmod +x $MC_DIR/FTBInstall.sh && \
   /bin/bash -c $MC_DIR/FTBInstall.sh && \
   mv $MC_DIR/$FTB_SERVER_JAR $MC_DIR/ftbserver.jar && \
