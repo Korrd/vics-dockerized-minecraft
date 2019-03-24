@@ -7,19 +7,21 @@ node {
 
       stage("variables setup") {
 
-        env.IMAGE_NAME = "FTB_INFINITY_1.7.10_2.6.0"
+        env.IMAGE_NAME = "FTB_INFINITY_1.7.10_3.0.2"
+        env.PACK_VERSION = "3_0_2"
+
         env.IMAGE_REPO = "korrd2/vics-dockerized-minecraft"
         env.GITHUB_REPO = "vics-dockerized-minecraft"
 
         withCredentials([usernamePassword(credentialsId: 'DOCKER', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
           env.DOCKER_USERNAME = "$DOCKER_USERNAME"
           env.DOCKER_PASSWORD = "$DOCKER_PASSWORD"
+          sh "docker login -u='$DOCKER_USERNAME' -p='$DOCKER_PASSWORD'"
         }
       }
 
       stage("build") {
-        sh "docker login -u='$DOCKER_USERNAME' -p='$DOCKER_PASSWORD'"
-        sh "docker build --pull -t '$IMAGE_REPO:$BUILD_NUMBER' ."
+        sh "docker build --pull --build-arg PACK_VERSION=$PACK_VERSION -t '$IMAGE_REPO:$BUILD_NUMBER' ."
       }
 
       stage("push") {
