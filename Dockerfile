@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER victomartin@gmail.com
 
@@ -18,8 +18,8 @@ COPY files/packages/etc.zip /usr/local/
 COPY start.sh $MCMA_DIR/start.sh
 
 # Install stuff.
-RUN apt-get update && \
-  apt-get install -y openjdk-8-jre software-properties-common unzip python-software-properties && \
+RUN apt update && \
+  apt install -y curl openjdk-8-jre software-properties-common unzip && \
   unzip etc.zip && \
   rm etc.zip && \
   chmod +x $MCMA_DIR/start.sh && \
