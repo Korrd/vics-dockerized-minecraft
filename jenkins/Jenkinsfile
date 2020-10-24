@@ -7,7 +7,7 @@ node {
 
       stage("variables setup") {
 
-        env.IMAGE_NAME = "FTB_D20_1.12_2.7.0"
+        env.IMAGE_NAME = "FTB_D20_1.12_2.8.0"
 
         // modpack Installer params for modpack.ch
         // See ftbInstaller --help for more info.
@@ -15,7 +15,7 @@ node {
         // PACK_VERSION  31 -> ftb direwolf 20 1.12.2
         // MOD_VERSION   65 -> 2.7.0
         env.PACK_VERSION = "31"
-        env.MOD_VERSION = "65"
+        env.MOD_VERSION = "144"
 
         env.IMAGE_REPO = "korrd2/vics-dockerized-minecraft"
         env.GITHUB_REPO = "vics-dockerized-minecraft"
@@ -28,7 +28,7 @@ node {
       }
 
       stage("build") {
-        sh "docker build --pull --build-arg PACK_VERSION=31 --build-arg MOD_VERSION=65 -t '$IMAGE_REPO:$BUILD_NUMBER' ."
+        sh "docker build --pull --build-arg PACK_VERSION=$PACK_VERSION --build-arg MOD_VERSION=$MOD_VERSION -t '$IMAGE_REPO:$BUILD_NUMBER' ."
       }
 
       stage("push") {
