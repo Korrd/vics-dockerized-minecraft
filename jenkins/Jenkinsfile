@@ -26,7 +26,7 @@ node {
 
       stage("push") {
 
-        if (env.BRANCH_NAME == "mc-eternal-11.1.2") {
+        if (env.BRANCH_NAME == "mc-eternal-1.12") {
           sh "docker tag '$IMAGE_REPO:$BUILD_NUMBER' '$IMAGE_REPO:$IMAGE_NAME'"
           sh "docker push '$IMAGE_REPO:$IMAGE_NAME'"
         } else {
