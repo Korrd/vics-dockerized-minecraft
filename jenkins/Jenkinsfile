@@ -7,15 +7,8 @@ node {
 
       stage("variables setup") {
 
-        env.IMAGE_NAME = "FTB_D20_1.12_2.7.0"
-
-        // modpack Installer params for modpack.ch
-        // See ftbInstaller --help for more info.
-        // PACK and MOD ID's can be obtained from the modpack.json file (Id and versions.id)
-        // PACK_VERSION  31 -> ftb direwolf 20 1.12.2
-        // MOD_VERSION   65 -> 2.7.0
-        env.PACK_VERSION = "31"
-        env.MOD_VERSION = "65"
+        env.PACK_VERSION = "1.3.7.1"
+        env.IMAGE_NAME = "ethernal_1.12_${PACK_VERSION}"
 
         env.IMAGE_REPO = "korrd2/vics-dockerized-minecraft"
         env.GITHUB_REPO = "vics-dockerized-minecraft"
@@ -28,22 +21,20 @@ node {
       }
 
       stage("build") {
-        sh "docker build --pull --build-arg PACK_VERSION=31 --build-arg MOD_VERSION=65 -t '$IMAGE_REPO:$BUILD_NUMBER' ."
+        sh "docker build --pull --build-arg PACK_VERSION=${PACK_VERSION} -t '$IMAGE_REPO:$BUILD_NUMBER' ."
       }
 
       stage("push") {
 
-        if (env.BRANCH_NAME == "ftb-direwolf20.1.12") {
+        if (env.BRANCH_NAME == "mc-eternal-11.1.2") {
           sh "docker tag '$IMAGE_REPO:$BUILD_NUMBER' '$IMAGE_REPO:$IMAGE_NAME'"
           sh "docker push '$IMAGE_REPO:$IMAGE_NAME'"
         } else {
-
           def SANITIZED_BRANCH_NAME = "${sanitizedBranchName(BRANCH_NAME)}"
 
           sh "docker tag '$IMAGE_REPO:$BUILD_NUMBER' '$IMAGE_REPO:$SANITIZED_BRANCH_NAME'"
           sh "docker push '$IMAGE_REPO:$SANITIZED_BRANCH_NAME'"
         }
-
       }
 
       slackSend color: 'good', message: "Branch `$BRANCH_NAME` from repo `$GITHUB_REPO` has built successfully"
