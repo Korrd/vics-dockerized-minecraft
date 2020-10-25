@@ -4,7 +4,7 @@ set -e # Stop if error
 sed '/^[[:blank:]]*#/d;/^\s*$/d' > /home/McMyAdmin/Minecraft/server.properties <<EOF
 #Minecraft server properties
 spawn-protection=16
-max-tick-time=20000
+max-tick-time=200000
 generator-settings=
 force-gamemode=false
 allow-nether=true
